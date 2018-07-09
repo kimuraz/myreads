@@ -1,0 +1,10 @@
+.Shelf {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 15px 30px 15px 0;
+    flex-wrap: wrap;
+}
+
+.page-count {
+    display: block;
+}

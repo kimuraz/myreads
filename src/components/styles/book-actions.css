@@ -1,0 +1,28 @@
+.Book-actions {
+    position: fixed;
+    min-width: 200px;
+    min-height: 30px;
+    background-color: white;
+    z-index: 9;
+    border-radius: 2px;
+    border: 1px solid #BDBDBD;
+    box-shadow: 1px 3px 10px 1px rgba(0, 0, 0, .5);
+}
+
+.Book-actions .actions-list {
+    list-style: none;
+    padding: 3px 0;
+    margin: 0;
+}
+
+.Book-actions .actions-list li {
+    padding: 3px 5px;
+    margin: 3px 0;
+    color: #212121;
+    cursor: pointer;
+    font-weight: 300;
+}
+
+.Book-actions .actions-list li:hover {
+    background-color: #D1C4E9;
+}

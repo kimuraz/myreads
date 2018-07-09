@@ -1,0 +1,21 @@
+.Search {
+  width: 100%;
+}
+
+.Search .input-group {
+  width: 40%;
+  margin: 20px auto;
+  text-align: center;
+  position: relative;
+}
+
+.Search .input-group button {
+  position: absolute;
+  top: -5px;
+  right: 0;
+  font-size: 20px;
+  border: none;
+  background: transparent;
+  color: #FFA000;
+  cursor: pointer;
+}
