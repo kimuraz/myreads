@@ -53,7 +53,7 @@ class BooksApi {
     return fetch(`${this.api}/books/${book.id}`, {
       method: 'PUT',
       headers: {
-        ...this.headers,
+        ...this.headers.headers,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({ shelf })
@@ -69,11 +69,11 @@ class BooksApi {
     return fetch(`${this.api}/search`, {
       method: 'POST',
       headers: {
-        ...this.headers,
-        'Content-Type': 'application/json'
+      ...this.headers.headers,
+      'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ query })
-    }).json(res => res.json());
+      body: JSON.stringify({ query, maxResults: 10 })
+    }).then(res => res.json());
   }
 }
 
