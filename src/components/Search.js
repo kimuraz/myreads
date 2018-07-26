@@ -11,42 +11,31 @@ class Search extends Component {
     super();
     this.state = {
       query: '',
-      latestQuery: '',
       books: []
     };
   }
 
   _setQuery(query) {
-    this.setState({ ...this.state, query });
-  }
-
-  _isEnter(key) {
-    if (key === 'Enter') {
-      this._doSearch();
-    }
+    this.setState({ ...this.state, query }, this._doSearch());
   }
 
   _doSearch() {
-    if (!this.state.query) {
-      alert('Fill up the search field first!');
-      return;
-    }
-    new BooksApi().search(this.state.query).then(data => {
-      if (data.error) {
-        alert(data.error);
-        return;
-      }
-      this.setState({
-        ...this.state,
-        books: data.books,
-        latestQuery: this.state.query,
-        query: ''
+    setTimeout(() => {
+      this.state.query && new BooksApi().search(this.state.query).then(data => {
+        if (data.error) {
+          alert(data.error);
+          return;
+        }
+        this.setState({
+          ...this.state,
+          books: data.books,
+        });
       });
-    });
+    }, 300);
   }
 
   render() {
-    const { books, query, latestQuery } = this.state;
+    const { books, query } = this.state;
 
     return (
       <div className="Search">
@@ -56,17 +45,16 @@ class Search extends Component {
             placeholder="Search for..."
             value={query}
             onChange={e => this._setQuery(e.target.value)}
-            onKeyPress={e => this._isEnter(e.key)}
           />
           <button onClick={() => this._doSearch()}>
             <MdSearch />
           </button>
         </div>
-        {latestQuery && <h1>Results for "{latestQuery}"</h1>}
-        {(books &&
+        {query && <h1>Results for "{query}"</h1>}
+        {(query && books &&
           books.length > 0) && (
             <Shelf
-              books={books.filter(b => !b.shelf)}
+              books={books}
               updateBook={this.props.updateBook}
             />
           )}

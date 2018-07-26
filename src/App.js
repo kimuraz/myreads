@@ -32,12 +32,12 @@ class App extends Component {
     const idx = this.state.books.findIndex(b => b.id === book.id);
     const api = new BooksApi();
     api.update(book, book.shelf);
-    if (idx) {
+    if (idx !== -1) {
       const newBooks = [...this.state.books];
       newBooks.splice(idx, 1, book);
       this.setState({
         ...this.state,
-        books: newBooks 
+        books: newBooks
       });
     } else {
       this.setState({ ...this.state, books: [...this.state.books, book] });
@@ -67,7 +67,13 @@ class App extends Component {
             />
             <Route
               path="/search"
-              render={() => <Search addBook={this.addBook} updateBook={this.updateBook}/>}
+              render={() => (
+                <Search
+                  addBook={this.addBook}
+                  updateBook={this.updateBook}
+                  books={books}
+                />
+              )}
             />
           </Switch>
         </BrowserRouter>
