@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { MdMoreVert } from 'react-icons/lib/md';
-import BooksApi from '../utils/BooksApi';
 import './styles/books.css';
 
-import BookActions from './BookActions';
+import BookShelfSelect from './BookShelfSelect';
 
 class BookCard extends Component {
   constructor(props) {
@@ -41,16 +40,12 @@ class BookCard extends Component {
 
   render() {
     const { book } = this.props;
-    const { menu } = this.state;
 
     return (
       <div className="Book-card">
+        <BookShelfSelect book={book} updateBook={this.updateBook} />
         {book ? (
           <main className="Book-details">
-            <MdMoreVert
-              className="right-menu"
-              onClick={e => this._showMenu(e)}
-            />
             {book.imageLinks &&
               book.imageLinks.smallThumbnail && (
                 <figure>
@@ -67,14 +62,6 @@ class BookCard extends Component {
                   </p>
                 ))}
             </div>
-            {menu.show && (
-              <BookActions
-                book={book}
-                position={menu}
-                unmount={this.closeMenu}
-                updateBook={this.updateBook}
-              />
-            )}
           </main>
         ) : null}
       </div>
